@@ -1,0 +1,53 @@
+spring:
+  profiles: production
+
+---
+
+spring:
+  profiles: gcp
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: "jdbc:mysql://10.16.240.3/payment"
+    username: "payment"
+    password: "${ENV_PAYMENT_SERVICE_DB_PASSWORD}"
+    initialization-mode: always
+    continue-on-error: true
+
+server:
+  port: ${PORT:8080}
+
+---
+
+spring:
+  profiles: development
+  datasource:
+    driverClassName: org.h2.Driver
+    url: "jdbc:h2:mem:payment"
+    username: "sa"
+    password: ""
+
+server:
+  port: 8086
+
+---
+
+spring:
+  application:
+    name: payment
+  jackson:
+    serialization:
+      indent_output: true
+    default-property-inclusion: non_null
+logging:
+  level:
+    io:
+      rappit:
+        services:
+          payment: DEBUG
+  pattern:
+    console: '[%thread] %-5level %logger{36} - %msg%n'
+server:
+  http2:
+    enabled: true
+  servlet:
+    context-path: /${spring.application.name}

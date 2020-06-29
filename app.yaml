@@ -1,0 +1,21 @@
+runtime: java11
+
+service: payment
+
+instance_class: F4
+
+entrypoint: 'java -jar payment-service/target/payment-service-1.0-SNAPSHOT.jar'
+env_variables:
+  SPRING_PROFILES_ACTIVE: "production,gcp"
+  GOOGLE_APPLICATION_CREDENTIALS: "payment-service/rappit-dbd8e65be7c7.json"
+
+inbound_services:
+- warmup
+
+automatic_scaling:
+  min_instances: 0
+  max_instances: 1
+  min_idle_instances: 0
+  max_idle_instances: automatic
+  min_pending_latency: automatic
+  max_pending_latency: automatic

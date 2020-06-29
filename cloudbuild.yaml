@@ -1,0 +1,11 @@
+steps:
+- name: 'gcr.io/cloud-builders/mvn'
+  args: ['-gs', './settings.xml', 'install', 'deploy']
+  env:
+  - 'MAVEN_REPO_USER=$_MAVEN_REPO_USER'
+  - 'MAVEN_REPO_PASSWORD=$_MAVEN_REPO_PASSWORD'
+- name: "gcr.io/cloud-builders/docker"
+  args: ["build", ".", "--tag", "gcr.io/rappit/payment", "-f", "Dockerfile.release"]
+- name: "gcr.io/cloud-builders/docker"
+  args: ["push", "gcr.io/rappit/payment"]
+timeout: "1600s"

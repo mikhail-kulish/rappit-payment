@@ -1,0 +1,37 @@
+{
+  "order": {
+    "id": "54321",
+    "amount": {
+      "value": 12.554,
+      "currency": "USD"
+    },
+    "description": "Test payment",
+    "items": [
+      {
+        "price": {
+          "value": 12.50,
+          "currency": "USD"
+        },
+        "description": "Some test item"
+      },
+      {
+        "price": {
+          "value": 12.778,
+          "currency": "USD"
+        },
+        "description": "Some test item2",
+        "sku": "test-sku-product",
+        "tax": {
+          "value": 0.556,
+          "currency": "USD"
+        }
+      }
+    ]
+  },
+  "customer": {
+    "id": "somecustomerid"
+  },
+  "merchant": {
+    "id": 1
+  }
+}
